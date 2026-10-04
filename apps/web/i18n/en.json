@@ -1,0 +1,58 @@
+{
+  "brand": {
+    "name": "ScholarFlow",
+    "tagline": "Transparent, Explainable Scholarship Disbursement & Integrity Platform"
+  },
+  "nav": {
+    "home": "Home",
+    "schemes": "Schemes",
+    "apply": "Apply Now",
+    "status": "Check Status",
+    "help": "Help & Grievance",
+    "privacy": "Privacy & DPDP",
+    "login": "Sign In",
+    "roles": {
+      "applicant": "Applicant Portal",
+      "reviewer": "Reviewer Desk",
+      "approver": "Approver Dashboard",
+      "admin": "Admin Console",
+      "auditor": "Audit Registry"
+    }
+  },
+  "landing": {
+    "badge": "Built for Digital India & DPDP Act 2023 Compliance",
+    "heroTitle": "No More Silent Rejections. Explainable, Dignified Scholarships.",
+    "heroSubtitle": "ScholarFlow replaces bureaucratic 'defective' tags with actionable correction loops, multi-lingual guidance, and cryptographically verified fraud prevention.",
+    "ctaApply": "Start Scholarship Application",
+    "ctaDemo": "Try Document Health Check",
+    "features": {
+      "humaneTitle": "Human-Centric Correction Loops",
+      "humaneDesc": "Never get rejected for a simple spelling drift or expired certificate without being told exactly how to fix it.",
+      "securityTitle": "Zero-Plaintext Aadhaar & DPDP Compliant",
+      "securityDesc": "Full compliance with the Digital Personal Data Protection Act: masked Aadhaar storage, encrypted bank vaults, and verifiable parental consent.",
+      "transparencyTitle": "Tamper-Evident Audit Chains",
+      "transparencyDesc": "Cryptographic SHA-256 block chains verify every review, claim, and approval to prevent institutional fraud."
+    }
+  },
+  "form": {
+    "personal": "Personal Details",
+    "academic": "Academic Record",
+    "income": "Income & Caste",
+    "bank": "Bank & DBT Details",
+    "documents": "Document Uploads",
+    "review": "Review & Health Check",
+    "submit": "Submit Application",
+    "submitting": "Submitting...",
+    "saveDraft": "Save Draft"
+  },
+  "status": {
+    "AUTO_CLEARED": "Auto-Cleared (Eligible)",
+    "NEEDS_CORRECTION": "Action Required (Correction Needed)",
+    "MANUAL_REVIEW": "Under Department Review",
+    "APPROVED_BY_REVIEWER": "Verified by Reviewer",
+    "SANCTIONED": "Disbursement Sanctioned",
+    "REJECTED_INELIGIBLE": "Ineligible",
+    "DRAFT": "Draft Saved",
+    "PROCESSING": "Processing Verifications"
+  }
+}

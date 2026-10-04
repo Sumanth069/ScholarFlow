@@ -1,0 +1,334 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Role {
+  APPLICANT
+  GUARDIAN
+  REVIEWER
+  APPROVER
+  ADMIN
+  AUDITOR
+}
+
+enum AppStatus {
+  DRAFT
+  SUBMITTED
+  PROCESSING
+  AUTO_CLEARED
+  NEEDS_CORRECTION
+  CORRECTION_SENT
+  RESUBMITTED
+  MANUAL_REVIEW
+  APPROVED_BY_REVIEWER
+  REJECTED_INELIGIBLE
+  APPEALED
+  LAPSED
+  REOPENED
+  HELP_REQUIRED
+  SANCTIONED
+  WITHDRAWN
+}
+
+enum Severity {
+  INFO
+  WARN
+  FIXABLE
+  HARD_FAIL
+}
+
+enum RuleStatus {
+  PASS
+  FAIL
+  SKIPPED
+  ERROR
+}
+
+enum DocType {
+  AADHAAR_MASKED
+  MARKSHEET
+  INCOME_CERT
+  CASTE_CERT
+  BONAFIDE
+  PASSBOOK
+  PHOTO
+  OTHER
+}
+
+enum ExtractStatus {
+  PENDING
+  RUNNING
+  DONE
+  FAILED
+  DELAYED
+}
+
+enum NotifChannel {
+  EMAIL
+  SMS
+  WHATSAPP
+  INAPP
+}
+
+enum NotifStatus {
+  QUEUED
+  SENT
+  DELIVERED
+  FAILED
+  SKIPPED
+}
+
+enum CorrectionStatus {
+  OPEN
+  SUBMITTED
+  LAPSED
+  CANCELLED
+}
+
+model User {
+  id             String        @id @default(cuid())
+  clerkId        String        @unique
+  role           Role
+  locale         String        @default("en")
+  institutionId  String?
+  institution    Institution?  @relation(fields: [institutionId], references: [id])
+  createdAt      DateTime      @default(now())
+  applications   Application[] @relation("ApplicantApps")
+}
+
+model Institution {
+  id           String        @id @default(cuid())
+  code         String        @unique
+  name         String
+  district     String
+  active       Boolean       @default(true)
+  users        User[]
+  applications Application[]
+}
+
+model Scheme {
+  id       String          @id @default(cuid())
+  slug     String          @unique
+  name     String
+  versions SchemeVersion[]
+}
+
+model SchemeVersion {
+  id           String        @id @default(cuid())
+  schemeId     String
+  scheme       Scheme        @relation(fields: [schemeId], references: [id])
+  version      Int
+  config       Json          // thresholds, validity windows, required docs, deadline, templates
+  publishedAt  DateTime?
+  applications Application[]
+
+  @@unique([schemeId, version])
+}
+
+model Application {
+  id               String              @id @default(cuid())
+  publicRef        String              @unique // e.g. SF-2026-000123
+  schemeVersionId  String
+  schemeVersion    SchemeVersion       @relation(fields: [schemeVersionId], references: [id])
+  applicantId      String
+  applicant        User                @relation("ApplicantApps", fields: [applicantId], references: [id])
+  institutionId    String
+  institution      Institution         @relation(fields: [institutionId], references: [id])
+  status           AppStatus           @default(DRAFT)
+  data             Json                // validated form payload (no full Aadhaar)
+  aadhaarLast4     String?
+  aadhaarHash      String?             // salted HMAC, for duplicate detection only
+  bankAcctEnc      Bytes?              // field-level encrypted
+  bankAcctLast4    String?
+  bankAcctHash     String?
+  minor            Boolean             @default(false)
+  version          Int                 @default(1) // optimistic concurrency
+  correctionRounds Int                 @default(0)
+  claimedById      String?
+  claimedAt        DateTime?
+  submittedAt      DateTime?
+  decidedAt        DateTime?
+  createdAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
+  documents        Document[]
+  evaluations      Evaluation[]
+  corrections      CorrectionRequest[]
+  notifications    Notification[]
+  consents         ConsentRecord[]
+  reviewActions    ReviewAction[]
+  fraudSignals     FraudSignal[]
+
+  @@index([status, institutionId, submittedAt])
+  @@index([aadhaarHash])
+  @@index([bankAcctHash])
+}
+
+model Document {
+  id            String        @id @default(cuid())
+  applicationId String
+  application   Application   @relation(fields: [applicationId], references: [id])
+  type          DocType
+  storageKey    String
+  mime          String
+  sizeBytes     Int
+  sha256        String
+  quality       Json?         // blur, resolution, skew scores
+  classifiedAs  DocType?
+  classifyConf  Float?
+  extractStatus ExtractStatus @default(PENDING)
+  extraction    Extraction?
+  supersedesId  String?       // re-upload chain
+  createdAt     DateTime      @default(now())
+
+  @@index([sha256])
+}
+
+model Extraction {
+  id         String   @id @default(cuid())
+  documentId String   @unique
+  document   Document @relation(fields: [documentId], references: [id])
+  provider   String
+  model      String
+  fields     Json     // { fieldName: { value, confidence, page, snippet, bbox? } }
+  rawRef     String?  // pointer to stored provider response (no PII in logs)
+  durationMs Int
+  createdAt  DateTime @default(now())
+}
+
+model Evaluation {
+  id             String             @id @default(cuid())
+  applicationId  String
+  application    Application        @relation(fields: [applicationId], references: [id])
+  ruleSetVersion String             // semver of packages/rules at run time
+  schemeVersion  Int
+  trigger        String             // submit | resubmit | rerun | preview
+  outcome        String             // AUTO_CLEARED | NEEDS_CORRECTION | MANUAL_REVIEW | REJECTED_INELIGIBLE
+  results        RuleResultRecord[]
+  createdAt      DateTime           @default(now())
+}
+
+model RuleResultRecord {
+  id           String     @id @default(cuid())
+  evaluationId String
+  evaluation   Evaluation @relation(fields: [evaluationId], references: [id])
+  ruleId       String
+  severity     Severity
+  status       RuleStatus
+  evidence     Json       // [{ label, entered, extracted, docId, page, snippet }]
+  msgEn        String
+  msgKn        String
+  reviewerMsg  String
+  fixHint      String?
+  fields       String[]
+
+  @@index([evaluationId, ruleId])
+}
+
+model CorrectionRequest {
+  id            String           @id @default(cuid())
+  applicationId String
+  application   Application      @relation(fields: [applicationId], references: [id])
+  round         Int
+  fields        String[]         // editable fields/doc slots
+  reasons       Json             // per-field plain language
+  tokenHash     String           @unique // hash of the link token
+  status        CorrectionStatus @default(OPEN)
+  dueAt         DateTime
+  remindersSent Int              @default(0)
+  usedAt        DateTime?
+  createdAt     DateTime         @default(now())
+}
+
+model ReviewAction {
+  id            String      @id @default(cuid())
+  applicationId String
+  application   Application @relation(fields: [applicationId], references: [id])
+  actorId       String
+  action        String      // CLAIM | APPROVE | REQUEST_CORRECTION | ESCALATE | REJECT | OVERRIDE
+  reason        String?
+  payload       Json?
+  createdAt     DateTime    @default(now())
+}
+
+model FraudSignal {
+  id            String      @id @default(cuid())
+  applicationId String
+  application   Application @relation(fields: [applicationId], references: [id])
+  kind          String      // DUP_AADHAAR | DUP_BANK | DUP_PHONE | DUP_FILE | INST_INACTIVE | META_ANOMALY
+  strength      String      // SOFT | STRONG
+  detail        Json
+  relatedAppIds String[]
+  createdAt     DateTime    @default(now())
+}
+
+model Notification {
+  id            String       @id @default(cuid())
+  applicationId String?
+  application   Application? @relation(fields: [applicationId], references: [id])
+  channel       NotifChannel
+  template      String
+  locale        String
+  dedupeKey     String       @unique // never send the same notice twice
+  status        NotifStatus  @default(QUEUED)
+  payload       Json
+  providerRef   String?
+  sentAt        DateTime?
+  createdAt     DateTime     @default(now())
+}
+
+model ConsentRecord {
+  id            String      @id @default(cuid())
+  applicationId String
+  application   Application @relation(fields: [applicationId], references: [id])
+  subject       String      // APPLICANT | GUARDIAN
+  noticeVersion String
+  givenAt       DateTime
+  withdrawnAt   DateTime?
+}
+
+model AuditLog {
+  id        BigInt   @id @default(autoincrement())
+  at        DateTime @default(now())
+  actorId   String?
+  actorRole String?
+  entity    String
+  entityId  String
+  event     String
+  payload   Json
+  prevHash  String
+  hash      String   @unique
+
+  @@index([entity, entityId])
+}
+
+model RegistryRecord {
+  id         String   @id @default(cuid())
+  regNumber  String   @unique
+  certType   String   // INCOME | CASTE
+  holderName String
+  value      Json     // { income: ... } or { category: ... }
+  issuedOn   DateTime
+  status     String   // ISSUED | UNDER_VERIFICATION | REVOKED
+}
+
+model SupportTicket {
+  id            String   @id @default(cuid())
+  applicationId String?
+  userId        String
+  subject       String
+  body          String
+  status        String   @default("OPEN")
+  createdAt     DateTime @default(now())
+}
+
+model ReferenceIfsc {
+  ifsc   String @id
+  bank   String
+  branch String
+}
