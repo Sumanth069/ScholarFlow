@@ -140,12 +140,12 @@ export default function AuditPage() {
         <div>
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-emerald-600">
             <ShieldCheck className="w-4 h-4" />
-            <span>Cryptographic Proof of Governance</span>
+            <span>Verifiable Event Logging</span>
           </div>
-          <h1 className="text-2xl font-bold text-slate-900 mt-1">Immutable Audit Hash Chain</h1>
+          <h1 className="text-2xl font-bold text-slate-900 mt-1">Audit Hash Chain</h1>
           <p className="text-sm text-slate-500">
-            Every status transition, document extraction, and approval decision is linked in a SHA-256
-            hash chain. Tamper-proof defense against institutional collusion.
+            Status transitions, extraction completions, and review actions are linked in an append-only
+            SHA-256 hash chain to verify ledger integrity against manual database modifications.
           </p>
         </div>
 

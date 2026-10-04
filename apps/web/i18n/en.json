@@ -1,15 +1,15 @@
 {
   "brand": {
     "name": "ScholarFlow",
-    "tagline": "Transparent, Explainable Scholarship Disbursement & Integrity Platform"
+    "tagline": "Scholarship application pre-verification that explains problems and routes them for correction"
   },
   "nav": {
     "home": "Home",
     "schemes": "Schemes",
-    "apply": "Apply Now",
+    "apply": "Apply",
     "status": "Check Status",
-    "help": "Help & Grievance",
-    "privacy": "Privacy & DPDP",
+    "help": "Help & Support",
+    "privacy": "Privacy Principles",
     "login": "Sign In",
     "roles": {
       "applicant": "Applicant Portal",
@@ -20,39 +20,39 @@
     }
   },
   "landing": {
-    "badge": "Built for Digital India & DPDP Act 2023 Compliance",
-    "heroTitle": "No More Silent Rejections. Explainable, Dignified Scholarships.",
-    "heroSubtitle": "ScholarFlow replaces bureaucratic 'defective' tags with actionable correction loops, multi-lingual guidance, and cryptographically verified fraud prevention.",
-    "ctaApply": "Start Scholarship Application",
-    "ctaDemo": "Try Document Health Check",
+    "badge": "Designed with DPDP principles in mind",
+    "heroTitle": "Explainable Application Pre-Verification & Correction",
+    "heroSubtitle": "ScholarFlow provides a pre-verification layer for scholarship applications, replacing vague rejection codes with actionable explanations, regional name matching, and scoped correction links.",
+    "ctaApply": "Test Application Flow",
+    "ctaDemo": "Run Scenario Benchmark",
     "features": {
-      "humaneTitle": "Human-Centric Correction Loops",
-      "humaneDesc": "Never get rejected for a simple spelling drift or expired certificate without being told exactly how to fix it.",
-      "securityTitle": "Zero-Plaintext Aadhaar & DPDP Compliant",
-      "securityDesc": "Full compliance with the Digital Personal Data Protection Act: masked Aadhaar storage, encrypted bank vaults, and verifiable parental consent.",
-      "transparencyTitle": "Tamper-Evident Audit Chains",
-      "transparencyDesc": "Cryptographic SHA-256 block chains verify every review, claim, and approval to prevent institutional fraud."
+      "humaneTitle": "Actionable Correction Routing",
+      "humaneDesc": "Surfaces specific, fixable deficiencies with bilingual explanations rather than opaque rejection notices.",
+      "securityTitle": "Data Minimization",
+      "securityDesc": "Informed by DPDP Act principles: masked Aadhaar storage, in-memory format validation, and guardian consent gates.",
+      "transparencyTitle": "Audit Hash Chain",
+      "transparencyDesc": "Hash-chained audit log linking state transitions to establish an immutable, verifiable event record."
     }
   },
   "form": {
     "personal": "Personal Details",
     "academic": "Academic Record",
-    "income": "Income & Caste",
+    "income": "Income & Category",
     "bank": "Bank & DBT Details",
     "documents": "Document Uploads",
-    "review": "Review & Health Check",
+    "review": "Pre-flight Review",
     "submit": "Submit Application",
     "submitting": "Submitting...",
     "saveDraft": "Save Draft"
   },
   "status": {
     "AUTO_CLEARED": "Auto-Cleared (Eligible)",
-    "NEEDS_CORRECTION": "Action Required (Correction Needed)",
-    "MANUAL_REVIEW": "Under Department Review",
+    "NEEDS_CORRECTION": "Correction Needed",
+    "MANUAL_REVIEW": "Manual Review Required",
     "APPROVED_BY_REVIEWER": "Verified by Reviewer",
-    "SANCTIONED": "Disbursement Sanctioned",
+    "SANCTIONED": "Approved for Sanction",
     "REJECTED_INELIGIBLE": "Ineligible",
     "DRAFT": "Draft Saved",
-    "PROCESSING": "Processing Verifications"
+    "PROCESSING": "Processing"
   }
 }

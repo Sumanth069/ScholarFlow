@@ -140,10 +140,10 @@ export default function ApplyPage() {
         {step === 1 && (
           <div className="space-y-6">
             <div className="space-y-2">
-              <h2 className="text-lg font-bold text-slate-900">Digital Personal Data Protection (DPDP) Consent</h2>
+              <h2 className="text-lg font-bold text-slate-900">Data Processing Consent</h2>
               <p className="text-xs text-slate-600 leading-relaxed">
-                Under the Digital Personal Data Protection Act, 2023, ScholarFlow collects only necessary
-                identity, academic, and banking information for direct benefit disbursement. Raw 12-digit Aadhaar
+                Informed by Digital Personal Data Protection (DPDP) Act principles, ScholarFlow collects only necessary
+                identity, academic, and banking information for application pre-verification. Raw 12-digit Aadhaar
                 numbers are never stored.
               </p>
             </div>
@@ -159,7 +159,7 @@ export default function ApplyPage() {
                 />
                 <span className="text-slate-700">
                   I give consent to process my masked Aadhaar last-4, educational marks, and bank account details
-                  solely for scholarship qualification and Direct Benefit Transfer (DBT).
+                  solely for scholarship eligibility evaluation.
                 </span>
               </label>
 

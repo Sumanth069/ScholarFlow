@@ -364,56 +364,57 @@ export default function LandingPage() {
     <div className="space-y-16 py-8">
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8 pb-4">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-blue-100 text-blue-800 mb-6">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>Next-Generation Indian Public Digital Welfare Stack</span>
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200 mb-6">
+          <Sparkles className="w-3.5 h-3.5 text-blue-600" />
+          <span>Scholarship Pre-Verification Prototype</span>
         </div>
-        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-slate-900 max-w-4xl mx-auto leading-tight">
-          No More Silent Rejections. <br />
+        <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 max-w-4xl mx-auto leading-tight">
+          Explainable Application Pre-Verification <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
-            Explainable, Dignified Scholarships.
+            With Actionable Correction Routing
           </span>
         </h1>
-        <p className="mt-6 text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-          ScholarFlow replaces bureaucratic &ldquo;defective&rdquo; application tags with automated
-          correction loops, regional transliteration-tolerant name matching, and cryptographic audit chains.
+        <p className="mt-6 text-base sm:text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
+          ScholarFlow acts as an intelligent pre-verification layer for scholarship applications,
+          explaining deficiencies with clear regional guidance and routing fixable errors for correction
+          before final official adjudication.
         </p>
 
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <Link
             href="/apply"
-            className="px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm shadow-md transition flex items-center gap-2"
+            className="px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm shadow-sm transition flex items-center gap-2"
           >
-            <span>Start Live Application</span>
+            <span>Test Application Intake</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
           <Link
             href="/reviewer"
             className="px-6 py-3.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 font-semibold text-sm shadow-sm transition flex items-center gap-2"
           >
-            <span>Open Reviewer Desk</span>
+            <span>Reviewer Adjudication Desk</span>
           </Link>
           <Link
             href="/audit"
             className="px-6 py-3.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 font-semibold text-sm shadow-sm transition flex items-center gap-2"
           >
             <Lock className="w-4 h-4 text-emerald-600" />
-            <span>Verify Audit Chain</span>
+            <span>Verify Audit Hash Chain</span>
           </Link>
         </div>
       </section>
 
-      {/* Pillars Section */}
+      {/* Core Principles */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
             <div className="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center text-amber-700">
               <RefreshCw className="w-6 h-6" />
             </div>
-            <h3 className="text-lg font-bold text-slate-900">Humane Correction Loops</h3>
+            <h3 className="text-base font-bold text-slate-900">Actionable Correction Links</h3>
             <p className="text-sm text-slate-600 leading-relaxed">
-              Never get silently rejected for a minor initial variation or an expired certificate.
-              Receive a single-use scoped link with plain Kannada and English explanations.
+              Provides specific bilingual (Kannada and English) explanations for fixable errors like
+              spelling drift or expired certificates, with single-use scoped correction links.
             </p>
           </div>
 
@@ -421,10 +422,10 @@ export default function LandingPage() {
             <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center text-blue-700">
               <Scale className="w-6 h-6" />
             </div>
-            <h3 className="text-lg font-bold text-slate-900">LLM Reads, Pure Rules Decide</h3>
+            <h3 className="text-base font-bold text-slate-900">LLM Extracts, Rules Decide</h3>
             <p className="text-sm text-slate-600 leading-relaxed">
-              No hallucinations in civic decisions. Multimodal models perform structured OCR,
-              while a 100% deterministic, zero-I/O pure rule engine enforces eligibility.
+              Multimodal models perform structured data extraction; eligibility evaluation is handled
+              by a pure, deterministic, zero-I/O rule engine to prevent hallucinated decisions.
             </p>
           </div>
 
@@ -432,10 +433,10 @@ export default function LandingPage() {
             <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-700">
               <Lock className="w-6 h-6" />
             </div>
-            <h3 className="text-lg font-bold text-slate-900">DPDP Act 2023 Aligned</h3>
+            <h3 className="text-base font-bold text-slate-900">Designed with DPDP Principles</h3>
             <p className="text-sm text-slate-600 leading-relaxed">
-              Zero plaintext Aadhaar storage (salted HMAC only), encrypted bank vaults,
-              and tamper-evident SHA-256 audit block chains preventing syndicate fraud.
+              Masked Aadhaar storage only (salted HMAC for deduplication), guardian consent gates
+              for minors, and a SHA-256 hash-chained audit log for state transition verification.
             </p>
           </div>
         </div>

@@ -93,11 +93,11 @@ export default function ReviewerPage() {
         <div>
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-blue-600">
             <UserCheck className="w-4 h-4" />
-            <span>Department Verification Desk</span>
+            <span>Reviewer Verification Desk</span>
           </div>
-          <h1 className="text-2xl font-bold text-slate-900 mt-1">Reviewer Adjudication Queue</h1>
+          <h1 className="text-2xl font-bold text-slate-900 mt-1">Reviewer Verification Queue</h1>
           <p className="text-sm text-slate-500">
-            Verify flagged cases, resolve phonetic name drift, and compose remedial correction requests.
+            Inspect flagged cases, compare extracted evidence against entered values, and compose targeted correction requests.
           </p>
         </div>
 

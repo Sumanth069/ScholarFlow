@@ -3,9 +3,9 @@ import type { Metadata } from 'next';
 import { Navbar } from '../components/Navbar';
 
 export const metadata: Metadata = {
-  title: 'ScholarFlow | Transparent, Explainable Scholarship Integrity Platform',
+  title: 'ScholarFlow | Scholarship Application Pre-Verification & Correction',
   description:
-    'Scholarship intake, extraction, pure deterministic rule engine, humane correction loop, and cryptographic audit chain for Indian public welfare schemes.',
+    'Scholarship application pre-verification layer that explains problems and routes them for correction. Designed with DPDP principles in mind.',
 };
 
 export default function RootLayout({
@@ -21,14 +21,14 @@ export default function RootLayout({
         <footer className="border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-500">
           <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
             <div>
-              <strong>ScholarFlow</strong> — Built for Algothon &apos;26. Aligned with DPDP Act 2023.
+              <strong>ScholarFlow</strong> — Pre-verification and correction layer. Designed with DPDP principles in mind.
             </div>
-            <div className="flex gap-4">
-              <span>Zero-Plaintext Aadhaar</span>
+            <div className="flex gap-4 text-slate-400">
+              <span>Masked Aadhaar storage</span>
               <span>•</span>
-              <span>SHA-256 Audit Chain</span>
+              <span>Audit hash chain</span>
               <span>•</span>
-              <span>Kannada / English Bilingual</span>
+              <span>Bilingual support (EN / KN)</span>
             </div>
           </div>
         </footer>

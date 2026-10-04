@@ -19,7 +19,7 @@ export function Navbar() {
               </div>
               <div>
                 <span className="text-xl font-bold tracking-tight text-slate-900">ScholarFlow</span>
-                <span className="block text-xs text-blue-600 font-medium">GovTech Integrity Platform</span>
+                <span className="block text-xs text-blue-600 font-medium">Intake & Pre-Verification Layer</span>
               </div>
             </Link>
           </div>
@@ -31,7 +31,7 @@ export function Navbar() {
                 pathname === '/' ? 'text-blue-600 bg-blue-50 font-semibold' : 'hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
-              Demo & Overview
+              Demo & Scenarios
             </Link>
             <Link
               href="/apply"
@@ -80,8 +80,8 @@ export function Navbar() {
           </nav>
 
           <div className="flex items-center gap-3">
-            <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">
-              DPDP 2023 Aligned
+            <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200">
+              DPDP Principles Guided
             </span>
           </div>
         </div>
