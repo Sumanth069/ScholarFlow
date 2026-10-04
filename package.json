@@ -6,7 +6,7 @@
   "packageManager": "pnpm@10.30.0",
   "scripts": {
     "dev": "pnpm --filter @scholarflow/web dev",
-    "build": "pnpm -r run build",
+    "build": "pnpm --filter @scholarflow/web build",
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "pnpm -r run lint",
